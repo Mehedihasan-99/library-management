@@ -1,14 +1,24 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { IoMenu } from "react-icons/io5";
+import { useContext } from 'react';
+import { AuthContext } from '../Providers/AuthProvider';
 
 const Navbar = () => {
 
-    const links = <div className="flex flex-col lg:flex-row *:text-xs gap-2 lg:gap-5 text-gray-700">
+    const { user, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+ 
+    const links = <div className="flex flex-col lg:flex-row *:text-xl gap- lg:gap-10 text-gray-700">
         <NavLink to="/" className='hover:text-blue-600'>Home</NavLink>
         <NavLink to="/all-books" className='hover:text-blue-600'>All Books</NavLink>
         <NavLink to="/add-book" className='hover:text-blue-600'>Add Book</NavLink>
         <NavLink to="/borrowed-books" className='hover:text-blue-600'>Borrowed Books</NavLink>
     </div>;
+
+    const handleLogout = () => {
+        logout();
+        navigate("/")
+    }
 
 
     return (
@@ -26,9 +36,10 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <NavLink to="/">
-                        <img src={`https://i.ibb.co/nMr6SHF/c-HJpdm-F0-ZS9sci9pb-WFn-ZXMvd2-Vic2l0-ZS8y-MDIz-LTA4-L3-Jhd3-Bpe-GVsb2-Zma-WNl-MV9jd-XRl-Xz-Nk-X2ls.jpg`}
+                        <img
+                            src={`https://i.ibb.co/nMr6SHF/c-HJpdm-F0-ZS9sci9pb-WFn-ZXMvd2-Vic2l0-ZS8y-MDIz-LTA4-L3-Jhd3-Bpe-GVsb2-Zma-WNl-MV9jd-XRl-Xz-Nk-X2ls.jpg`}
                             alt=""
-                            className='size-8' />
+                            className='size-10 rounded-full' />
                     </NavLink>
                     <h2 className='text-2xl font-bold'>Library Management</h2>
                 </div>
@@ -38,14 +49,27 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="nav-end gap-10">
-                    <div className='space-x-2'>
-                        <button className="btn btn-primary btn-sm text-white">
-                            <Link to="/login"> Login </Link>
-                        </button>
-                        <button className="btn btn-primary btn-sm text-white">
-                            <Link to="/register"> Register </Link>
-                        </button>
-                    </div>
+                {
+                        user ? <div className='relative group'>
+                            <img
+                                alt="user photo"
+                                src={ user?.photo || user?.photoURL}
+                                className='w-10 rounded-full cursor-pointer' />
+                            <div className="absolute top-12 right-0 bg-white shadow-lg rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <p className='text-xs md:text-xl'>{user?.name || user?.displayName || user.email}</p>
+                                <button onClick={handleLogout} className="btn btn-primary btn-sm text-white">Logout
+                                </button>
+                            </div>
+                        </div> :
+                            <div className='space-x-2'>
+                                <button className="btn btn-primary btn-sm text-white">
+                                    <Link to="/login"> Login </Link>
+                                </button>
+                                <button className="btn btn-primary btn-sm text-white">
+                                    <Link to="/register"> Register </Link>
+                                </button>
+                            </div>
+                    }
                 </div>
             </div>
         </div>
