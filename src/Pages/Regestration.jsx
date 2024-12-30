@@ -14,8 +14,8 @@ const Register = () => {
         setError({})
         // get form data
         const form = e.target;
-        const name = form.name.value;
-        const photo = form.photo.value;
+        // const name = form.name.value;
+        // const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
         if (password.length < 6) {

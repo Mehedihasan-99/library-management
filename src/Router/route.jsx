@@ -3,6 +3,10 @@ import HomePage from "../Pages/HomePage";
 import MainLayout from "../Layout/MainLayout";
 import Login from "../Pages/Login";
 import Register from "../Pages/Regestration";
+import AllBooks from "../Pages/AllBooks";
+import AddBook from "../Pages/AddBook";
+import BorrowedBooks from "../Pages/BorrowedBooks";
+import PrivateRoute from "./PrivateRoute";
 
 const route = createBrowserRouter([
     {
@@ -13,6 +17,20 @@ const route = createBrowserRouter([
             {
                 path: "/",
                 element: <HomePage />
+            },
+            {
+                path: "/all-books",
+                element: <AllBooks />
+            },
+            {
+                path: "/add-book",
+                element: <PrivateRoute>
+                    <AddBook/>
+                </PrivateRoute>
+            },
+            {
+                path: "/borrowed-books",
+                element: <BorrowedBooks />
             }
         ]
     },

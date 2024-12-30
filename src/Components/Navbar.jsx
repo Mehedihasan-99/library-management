@@ -24,7 +24,7 @@ const Navbar = () => {
     return (
         <div className='bg-slate-300'>
             <div className="navbar justify-between md:w-11/12 mx-auto">
-                <div className="nav-start space-x-2">
+                <div className="nav-start space-x-1 md:space-x-2">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className=" text-2xl lg:hidden">
                             <IoMenu />
@@ -39,9 +39,9 @@ const Navbar = () => {
                         <img
                             src={`https://i.ibb.co/nMr6SHF/c-HJpdm-F0-ZS9sci9pb-WFn-ZXMvd2-Vic2l0-ZS8y-MDIz-LTA4-L3-Jhd3-Bpe-GVsb2-Zma-WNl-MV9jd-XRl-Xz-Nk-X2ls.jpg`}
                             alt=""
-                            className='size-10 rounded-full' />
+                            className='size-8 md:size-10 rounded-full' />
                     </NavLink>
-                    <h2 className='text-2xl font-bold'>Library Management</h2>
+                    <h2 className='text-xs md:text-2xl font-bold'>Library Management</h2>
                 </div>
                 <div className="nav-center hidden lg:flex">
                     <ul className=" px-1">
@@ -61,11 +61,11 @@ const Navbar = () => {
                                 </button>
                             </div>
                         </div> :
-                            <div className='space-x-2'>
-                                <button className="btn btn-primary btn-sm text-white">
+                            <div className='space-x-1 md:space-x-2'>
+                                <button className="btn p-1 md:p-2 btn-primary btn-sm text-white">
                                     <Link to="/login"> Login </Link>
                                 </button>
-                                <button className="btn btn-primary btn-sm text-white">
+                                <button className="btn p-1 md:p-2 btn-primary btn-sm text-white">
                                     <Link to="/register"> Register </Link>
                                 </button>
                             </div>
