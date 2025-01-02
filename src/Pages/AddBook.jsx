@@ -10,11 +10,15 @@ const AddBook = () => {
     const [formData, setFormData] = useState({
         image: "",
         name: "",
-        quantity: 0,
         author: "",
         category: "Novel",
+        publisher: "",
+        language: "",
+        quantity: 0,
+        rating: 0,
+        price: 0,
+        releaseDate: "",
         description: "",
-        rating: 1,
         seller: user?.email,
     });
 
@@ -26,7 +30,10 @@ const AddBook = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target
+
         const result = await axios.post(`${import.meta.env.VITE_API_URL}/add-book`, formData)
+        console.log(formData)
+        console.log(result)
         if (result.data.insertedId) {
             Swal.fire({
                 title: "Success !!",
@@ -45,131 +52,192 @@ const AddBook = () => {
                 onSubmit={handleSubmit}
                 className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
             >
-                <div className="mb-4">
-                    <label
-                        className="block text-gray-700 text-sm font-bold mb-2"
-                    >
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.seller}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        readOnly
-                    />
-                </div>
-                <div className="mb-4">
-                    <label
-                        className="block text-gray-700 text-sm font-bold mb-2"
-                    >
-                        Upload Book Cover Image URL :
-                    </label>
-                    <input
-                        type="text"
-                        name="image"
-                        value={formData.image}
-                        onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label
-                        className="block text-gray-700 text-sm font-bold mb-2"
-                    >
-                        Book Title :
-                    </label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label
-                        className="block text-gray-700 text-sm font-bold mb-2"
-                    >
-                        Quantity :
-                    </label>
-                    <input
-                        type="number"
-                        name="quantity"
-                        value={formData.quantity}
-                        onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label
-                        className="block text-gray-700 text-sm font-bold mb-2"
-                    >
-                        Author Name :
-                    </label>
-                    <input
-                        type="text"
-                        name="author"
-                        value={formData.author}
-                        onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label
-                        className="block text-gray-700 text-sm font-bold mb-2"
-                    >
-                        Category :
-                    </label>
-                    <select
-                        name="category"
-                        value={formData.category}
-                        onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        required
-                    >
-                        <option>Novel</option>
-                        <option>Thriller</option>
-                        <option>History</option>
-                        <option>Drama</option>
-                        <option>Sci-Fi</option>
-                    </select>
-                </div>
-                <div className="mb-4">
-                    <label
-                        className="block text-gray-700 text-sm font-bold mb-2"
-                    >
-                        Short Description :
-                    </label>
-                    <textarea
-                        name="description"
-                        value={formData.description}
-                        onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        rows="2"
-                        required
-                    ></textarea>
-                </div>
-                <div className="mb-4">
-                    <label
-                        className="block text-gray-700 text-sm font-bold mb-2"
-                    >
-                        Rating (1-5) :
-                    </label>
-                    <input
-                        type="number"
-                        name="rating"
-                        min="1"
-                        max="5"
-                        value={formData.rating}
-                        onChange={handleChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        required
-                    />
+                <div className="grid md:grid-cols-2 gap-5">
+                    <div className="hidden">
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                        >
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.seller}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            readOnly
+                        />
+                    </div>
+                    <div>
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                        >
+                            Book Cover Image URL :
+                        </label>
+                        <input
+                            type="text"
+                            name="image"
+                            value={formData.image}
+                            onChange={handleChange}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                        >
+                            Book Title :
+                        </label>
+                        <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                        >
+                            Author Name :
+                        </label>
+                        <input
+                            type="text"
+                            name="author"
+                            value={formData.author}
+                            onChange={handleChange}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                        >
+                            Category :
+                        </label>
+                        <select
+                            name="category"
+                            value={formData.category}
+                            onChange={handleChange}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            required
+                        >
+                            <option>Novel</option>
+                            <option>Thriller</option>
+                            <option>History</option>
+                            <option>Drama</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                        >
+                            Publisher :
+                        </label>
+                        <input
+                            type="text"
+                            name="publisher"
+                            value={formData.publisher}
+                            onChange={handleChange}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                        >
+                            Language :
+                        </label>
+                        <input
+                            type="text"
+                            name="language"
+                            value={formData.language}
+                            onChange={handleChange}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                        >
+                            Quantity :
+                        </label>
+                        <input
+                            type="number"
+                            name="quantity"
+                            value={formData.quantity}
+                            onChange={handleChange}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                        >
+                            Rating (1-5) :
+                        </label>
+                        <input
+                            type="number"
+                            name="rating"
+                            min="1"
+                            max="5"
+                            value={formData.rating}
+                            onChange={handleChange}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                        >
+                            Price :
+                        </label>
+                        <input
+                            type="number"
+                            name="price"
+                            value={formData.price}
+                            onChange={handleChange}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                        >
+                            Release Date :
+                        </label>
+                        <input
+                            type="date"
+                            name="releaseDate"
+                            value={formData.releaseDate}
+                            onChange={handleChange}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            required
+                        />
+                    </div>
+                    <div className="col-span-2 mb-5">
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                        >
+                            Description :
+                        </label>
+                        <textarea
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChange}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            rows="2"
+                            required
+                        ></textarea>
+                    </div>
                 </div>
                 <div className="flex items-center justify-center">
                     <button
@@ -185,3 +253,4 @@ const AddBook = () => {
 };
 
 export default AddBook;
+

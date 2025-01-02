@@ -20,7 +20,6 @@ const Navbar = () => {
         navigate("/")
     }
 
-
     return (
         <div className='bg-slate-300'>
             <div className="navbar justify-between md:w-11/12 mx-auto">

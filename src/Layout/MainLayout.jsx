@@ -5,7 +5,7 @@ import Footer from "../Components/Footer";
 const MainLayout = () => {
 
     return (
-        <div className="relative">
+        <div className="bg-base-200 relative">
             <header className="sticky  top-0 z-50">
                 <Navbar />
             </header>

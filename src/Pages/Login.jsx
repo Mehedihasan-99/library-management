@@ -39,10 +39,7 @@ const Login = () => {
 
     const handleGoogleLogin = () => {
         googleLogin()
-            .then(result => {
-                const signIn = result.user;
-                console.log(signIn)
-                setUser(signIn)
+            .then(() => {
                 Swal.fire({
                     title: 'Success!',
                     text: 'Login Successfully',
