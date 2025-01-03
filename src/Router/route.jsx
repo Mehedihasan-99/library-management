@@ -8,6 +8,7 @@ import AddBook from "../Pages/AddBook";
 import CategoryBooksPage from "../Pages/CategoryBooksPage "
 import BorrowedBooks from "../Pages/BorrowedBooks";
 import PrivateRoute from "./PrivateRoute";
+import BookDetailsPage from "../Pages/BookDetailsPage";
 
 const route = createBrowserRouter([
     {
@@ -24,6 +25,11 @@ const route = createBrowserRouter([
                 path:"/category/:category",
                 element: <CategoryBooksPage />,
                 loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/category/${params.category}`)
+            },
+            {
+                path: "/book-details/:id",
+                element: <BookDetailsPage />,
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/book-details/${params.id}`)
             },
             {
                 path: "/all-books",

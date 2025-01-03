@@ -6,7 +6,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 
 const Login = () => {
 
-    const { loginUser, googleLogin, setUser } = useContext(AuthContext);
+    const { loginUser, googleLogin } = useContext(AuthContext);
     const [error, setError] = useState({});
     const location = useLocation();
     const navigate = useNavigate();
@@ -91,7 +91,7 @@ const Login = () => {
                         <div className="form-control mt-2 md:mt-6">
                             <button className="p-2 rounded-lg bg-blue-500 w-40 mx-auto">Login</button>
                         </div>
-                        <p className="text-center pt-2">Don't Have An Account ? <Link to="/register" ><span className="text-red-500">Register</span></Link> </p>
+                        <p className="text-center pt-2">Do not Have An Account ? <Link to="/register" ><span className="text-red-500">Register</span></Link> </p>
                     </form>
                     <div className="divider"></div>
                     <button onClick={handleGoogleLogin} className="w-40 md:w-60 mx-auto md:text-xl font-bold btn btn-accent">Login with Google</button>
