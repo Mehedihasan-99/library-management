@@ -7,20 +7,19 @@ import { useNavigate } from "react-router-dom";
 const AddBook = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate()
-    const [formData, setFormData] = useState({
+    
+    const newBook = {
         image: "",
         name: "",
         author: "",
         category: "Novel",
-        publisher: "",
-        language: "",
         quantity: 0,
         rating: 0,
-        price: 0,
-        releaseDate: "",
         description: "",
-        seller: user?.email,
-    });
+        owner: user?.email,
+    }
+    const [formData, setFormData] = useState(newBook);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -29,11 +28,8 @@ const AddBook = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const form = e.target
 
         const result = await axios.post(`${import.meta.env.VITE_API_URL}/add-book`, formData)
-        console.log(formData)
-        console.log(result)
         if (result.data.insertedId) {
             Swal.fire({
                 title: "Success !!",
@@ -41,7 +37,7 @@ const AddBook = () => {
                 icon: "success"
             });
         }
-        form.reset();
+        setFormData(newBook)
         navigate('/')
     };
 
@@ -53,20 +49,6 @@ const AddBook = () => {
                 className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
             >
                 <div className="grid md:grid-cols-2 gap-5">
-                    <div className="hidden">
-                        <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                        >
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            name="email"
-                            value={formData.seller}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            readOnly
-                        />
-                    </div>
                     <div>
                         <label
                             className="block text-gray-700 text-sm font-bold mb-2"
@@ -86,7 +68,7 @@ const AddBook = () => {
                         <label
                             className="block text-gray-700 text-sm font-bold mb-2"
                         >
-                            Book Title :
+                            Book Name :
                         </label>
                         <input
                             type="text"
@@ -135,36 +117,6 @@ const AddBook = () => {
                         <label
                             className="block text-gray-700 text-sm font-bold mb-2"
                         >
-                            Publisher :
-                        </label>
-                        <input
-                            type="text"
-                            name="publisher"
-                            value={formData.publisher}
-                            onChange={handleChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                        >
-                            Language :
-                        </label>
-                        <input
-                            type="text"
-                            name="language"
-                            value={formData.language}
-                            onChange={handleChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                        >
                             Quantity :
                         </label>
                         <input
@@ -188,36 +140,6 @@ const AddBook = () => {
                             min="1"
                             max="5"
                             value={formData.rating}
-                            onChange={handleChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                        >
-                            Price :
-                        </label>
-                        <input
-                            type="number"
-                            name="price"
-                            value={formData.price}
-                            onChange={handleChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                        >
-                            Release Date :
-                        </label>
-                        <input
-                            type="date"
-                            name="releaseDate"
-                            value={formData.releaseDate}
                             onChange={handleChange}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             required
@@ -253,4 +175,3 @@ const AddBook = () => {
 };
 
 export default AddBook;
-

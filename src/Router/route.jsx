@@ -9,6 +9,7 @@ import CategoryBooksPage from "../Pages/CategoryBooksPage "
 import BorrowedBooks from "../Pages/BorrowedBooks";
 import PrivateRoute from "./PrivateRoute";
 import BookDetailsPage from "../Pages/BookDetailsPage";
+import UpdateBookPage from "../Pages/UpdateBookPage";
 
 const route = createBrowserRouter([
     {
@@ -22,23 +23,32 @@ const route = createBrowserRouter([
                 loader: () => fetch(`${import.meta.env.VITE_API_URL}/all-books`)
             },
             {
-                path:"/category/:category",
+                path: "/category/:category",
                 element: <CategoryBooksPage />,
-                loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/category/${params.category}`)
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/category/${params.category}`)
             },
             {
                 path: "/book-details/:id",
-                element: <BookDetailsPage />,
+                element: <PrivateRoute>
+                    <BookDetailsPage />
+                </PrivateRoute>,
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/book-details/${params.id}`)
+            },
+            {
+                path: "/update-book/:id",
+                // element: <h2>update</h2>
+                element: <UpdateBookPage />,
                 loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/book-details/${params.id}`)
             },
             {
                 path: "/all-books",
-                element: <AllBooks />
+                element: <AllBooks />,
+                loader: () => fetch(`${import.meta.env.VITE_API_URL}/all-books`)
             },
             {
                 path: "/add-book",
                 element: <PrivateRoute>
-                    <AddBook/>
+                    <AddBook />
                 </PrivateRoute>
             },
             {
@@ -53,7 +63,7 @@ const route = createBrowserRouter([
     },
     {
         path: "/register",
-        element: <Register/>
+        element: <Register />
     }
 ]);
 
