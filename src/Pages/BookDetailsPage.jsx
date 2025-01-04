@@ -1,14 +1,18 @@
 import { useState, useContext } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../Providers/AuthProvider";
 import Rating from "react-rating-stars-component";
+import Swal from "sweetalert2";
 
 const BookDetailsPage = () => {
     const loadBook = useLoaderData()
     const { user } = useContext(AuthContext)
     const [book, setBook] = useState(loadBook);
     const [isModalOpen, setModalOpen] = useState(false);
+
+    const navigate = useNavigate()
+    const email = user?.email;
 
     const handleBorrow = async (returnDate) => {
         try {
@@ -19,19 +23,52 @@ const BookDetailsPage = () => {
                 email: user.email,
                 returnDate,
             };
-
-            const result = await axios.post(`${import.meta.env.VITE_API_URL}/add-borrow-book`, borrowData);
-            console.log(result)
+            await axios.post(`${import.meta.env.VITE_API_URL}/add-borrow-book`, borrowData);
 
             setBook((prev) => ({ ...prev, quantity: prev.quantity - 1 }));
 
-            // toast.success("Book borrowed successfully!");
+            Swal.fire({
+                title: "Success !!",
+                text: "Your Book borrowed successfully!",
+                icon: "success"
+            });
+
             setModalOpen(false);
-        } catch (error) {
-            console.error("Error borrowing book:", error);
-            // toast.error("Failed to borrow the book.");
+            navigate("/borrowed-books")
+        } catch {
+            Swal.fire({
+                title: "Something Wrong !!",
+                text: "Failed to borrow the book.",
+                icon: "Error"
+            });
         }
     };
+
+    const handleModal = async () => {
+        try {
+            const borrowedBooksResponse = await axios.get(`${import.meta.env.VITE_API_URL}/borrowed-books?email=${email}`);
+            const alreadyBorrowed = borrowedBooksResponse.data.some(borrowedBook => borrowedBook.bookId === book._id);
+
+            if (alreadyBorrowed) {
+                Swal.fire({
+                    title: "Already Borrowed !!",
+                    text: "You have already borrowed this book.",
+                    icon: "warning",
+                });
+                return;
+            }
+
+            setModalOpen(true);
+        } catch (error) {
+            console.error("Error fetching borrowed books:", error);
+            Swal.fire({
+                title: "Error !!",
+                text: "Something went wrong while checking borrowed books.",
+                icon: "error",
+            });
+        }
+    };
+
 
     return (
         <div className="p-8 bg-gray-50">
@@ -52,7 +89,7 @@ const BookDetailsPage = () => {
                 <p className="text-gray-600 mt-4"><strong> Description :</strong> {book.description}</p>
 
                 <button
-                    onClick={() => { setModalOpen(true) }}
+                    onClick={ handleModal }
                     className="btn btn-primary mt-6 font-bold text-2xl"
                     disabled={book.quantity <= 0}
                 >

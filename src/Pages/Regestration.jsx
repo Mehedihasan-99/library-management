@@ -12,7 +12,6 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setError({})
-        // get form data
         const form = e.target;
         // const name = form.name.value;
         // const photo = form.photo.value;

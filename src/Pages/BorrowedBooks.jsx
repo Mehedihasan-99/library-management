@@ -8,15 +8,12 @@ const BorrowedBooks = () => {
     const [borrowedBooks, setBorrowedBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const email = user?.email;
-    console.log(borrowedBooks)
     useEffect(() => {
         const fetchBooks = async () => {
             try {
                 const response = await axios(`${import.meta.env.VITE_API_URL}/borrowed-books?email=${email}`);
                 const borrowedBooksData = response.data;
-                console.log(borrowedBooksData)
 
-                // For each borrowed book, fetch the details for book details
                 const bookWithDetails = await Promise.all(
                     borrowedBooksData.map(async (borrowedBook) => {
                         const bookResponse = await axios(`${import.meta.env.VITE_API_URL}/book-details/${borrowedBook.bookId}`)
@@ -51,9 +48,8 @@ const BorrowedBooks = () => {
                     <tr className="bg-gray-200">
                         <th className="border border-gray-300 px-4 py-2">Cover</th>
                         <th className="border border-gray-300 px-4 py-2">Title</th>
+                        <th className="border border-gray-300 px-4 py-2">Author Name</th>
                         <th className="border border-gray-300 px-4 py-2">Category</th>
-                        <th className="border border-gray-300 px-4 py-2"> Quantity</th>
-                        <th className="border border-gray-300 px-4 py-2">Return Date</th>
                         <th className="border border-gray-300 px-4 py-2">Action</th>
                     </tr>
                 </thead>
@@ -66,10 +62,10 @@ const BorrowedBooks = () => {
                                 <td className="border border-gray-300 px-4 py-2">
                                     <img src={book.bookDetails.image} alt={book.bookDetails.title} className="w-16 h-20 object-cover" />
                                 </td>
-                                <td className="border border-gray-300 px-4 py-2">{book.bookDetails.name}</td>
+                                <td className="border border-gray-300 font-bold text-2xl px-4 py-2">{book.bookDetails.name}</td>
+                                <td className="border text-xl font-bold border-gray-300 px-4 py-2">{book.bookDetails.author}</td>
+                                
                                 <td className="border border-gray-300 px-4 py-2">{book.bookDetails.category}</td>
-                                <td className="border border-gray-300 px-4 py-2">{book.bookDetails.quantity}</td>
-                                <td className="border border-gray-300 px-4 py-2">{book.returnDate}</td>
                                 <td className="border border-gray-300 px-4 py-2 text-center">
                                     <button
                                         onClick={() => handleReturn(book._id)}

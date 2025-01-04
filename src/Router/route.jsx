@@ -10,12 +10,13 @@ import BorrowedBooks from "../Pages/BorrowedBooks";
 import PrivateRoute from "./PrivateRoute";
 import BookDetailsPage from "../Pages/BookDetailsPage";
 import UpdateBookPage from "../Pages/UpdateBookPage";
+import Error from "../Pages/Error";
 
 const route = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
-        error: <h2>Error</h2>,
+        errorElement: <Error />,
         children: [
             {
                 path: "/",
@@ -36,7 +37,6 @@ const route = createBrowserRouter([
             },
             {
                 path: "/update-book/:id",
-                // element: <h2>update</h2>
                 element: <UpdateBookPage />,
                 loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/book-details/${params.id}`)
             },

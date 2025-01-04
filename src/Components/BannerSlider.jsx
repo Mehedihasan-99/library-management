@@ -17,7 +17,6 @@ const BannerSlider = () => {
                 modules={[Pagination, Navigation, Autoplay]}
                 className="w-11/12 md:w-full mx-auto h-80 rounded-lg overflow-hidden"
             >
-                {/* Slide 1 */}
                 <SwiperSlide
                     className="flex flex-row justify-center items-center bg-cover bg-center text-white text-center "
                     style={{
@@ -30,7 +29,6 @@ const BannerSlider = () => {
                         Discover a vast collection of books to enrich your knowledge.
                     </p>
                 </SwiperSlide>
-                {/* Slide 1 */}
                 <SwiperSlide className="flex  bg-blue-500 text-white "
                     style={{
                         backgroundImage: "url('https://i.ibb.co/YkjzBBC/young-student-learning-library.jpg')",
@@ -48,8 +46,6 @@ const BannerSlider = () => {
                         </p>
                     </div>
                 </SwiperSlide>
-
-                {/* Slide 2 */}
                 <SwiperSlide className="flex flex-col items-center justify-center bg-green-500 text-white h-64">
                     <img
                         src="https://i.ibb.co/tXtHKGj/student-boy-with-book.jpg"
@@ -60,8 +56,6 @@ const BannerSlider = () => {
                         Master the art of communication in another language and unlock career and travel opportunities.
                     </p>
                 </SwiperSlide>
-
-                {/* Slide 3 */}
                 <SwiperSlide className="flex flex-col items-center justify-center bg-purple-500 text-white h-64">
                     <img
                         src="https://www.vecteezy.com/vector-art/2294883-digital-library-web-banner-design-students-reading-book-on-online-library-web-online-education-digital-classroom-e-learning-concept-header-or-footer-banner"
@@ -77,5 +71,3 @@ const BannerSlider = () => {
 };
 
 export default BannerSlider;
-
-{/* <a href="https://www.vecteezy.com/vector-art/2294883-digital-library-web-banner-design-students-reading-book-on-online-library-web-online-education-digital-classroom-e-learning-concept-header-or-footer-banner">Digital Library Web Banner Design. students Reading book on online library web. online education, digital classroom. E-Learning concept. header or footer banner. Vectors by Vecteezy</a> */ }

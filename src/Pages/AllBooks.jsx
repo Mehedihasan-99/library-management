@@ -1,12 +1,11 @@
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Rating from "react-rating-stars-component";
 
 const AllBooks = () => {
     const books = useLoaderData();
-    const navigate = useNavigate();
-
+    console.log(books)
     const categories = ["All", "Novel", "Thriller", "History", "Drama"];
 
 
@@ -47,7 +46,7 @@ const AllBooks = () => {
                                             alt={book.name}
                                             className="w-full h-48 object-cover rounded-lg"
                                         />
-                                        <div className='text-xl space-y-2'>
+                                        <div className='text-xl flex-1 space-y-2'>
                                             <h3 className="text-2xl font-bold text-gray-800 mt-3">{book.name}</h3>
                                             <p><strong>By : </strong>{book.author}</p>
                                             <p><strong>Category :</strong> {book.category}</p>
@@ -57,14 +56,14 @@ const AllBooks = () => {
                                                 <span className="ml-2 text-sm text-gray-500">{book.rating}</span>
                                             </div>
                                             <p><small>Discription :  {book.description.slice(0, 50)} {book.description.length >= 80 && "..."} </small></p>
-                                            <div className="card-actions justify-end">
-                                                <Link
-                                                    to={`/update-book/${book._id}`}
-                                                    className="mt-3 btn btn-primary w-full"
-                                                >
-                                                    Update
-                                                </Link>
-                                            </div>
+                                        </div>
+                                        <div className="card-actions justify-end">
+                                            <Link
+                                                to={`/update-book/${book._id}`}
+                                                className="mt-3 btn btn-primary w-full"
+                                            >
+                                                Update
+                                            </Link>
                                         </div>
                                     </div>
                                 ))
@@ -73,29 +72,9 @@ const AllBooks = () => {
                     </TabPanel>
                 ))}
             </Tabs>
-            
+
         </div>
     );
 };
 
 export default AllBooks;
-
-
-{/* <div
-    key={book._id || book.id}
-    className="card w-full bg-base-100 shadow-xl"
->
-    <div className="card-body">
-        <h2 className="card-title">{book.title}</h2>
-        <p>Author: {book.author}</p>
-        <p>Rating: {book.rating} / 5</p>
-        <div className="card-actions justify-end">
-            <button
-                className="btn btn-primary"
-                onClick={() => handleUpdate(book._id || book.id)}
-            >
-                Update
-            </button>
-        </div>
-    </div>
-</div> */}
