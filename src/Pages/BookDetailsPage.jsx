@@ -72,29 +72,31 @@ const BookDetailsPage = () => {
 
     return (
         <div className="p-8 bg-gray-50">
-            <div className="card bg-white shadow-md p-6 rounded-lg max-w-3xl mx-auto">
+            <div className="flex flex-col md:flex-row justify-center items-center md:gap-5  bg-white shadow-md p-2 md:p-6 rounded-lg max-w-3xl mx-auto">
                 <img
                     src={book.image}
                     alt={book.name}
-                    className="w-full h-64 object-cover rounded-lg"
+                    className=" h-40 md:h-full object-cover rounded-lg"
                 />
-                <h2 className="text-3xl font-semibold text-gray-800 mt-6">{book.name}</h2>
-                <p className="text-gray-600 mt-2"><strong>Author :</strong> {book.author}</p>
-                <p className="text-gray-600 mt-2"><strong> Category :</strong> {book.category}</p>
-                <p className="text-gray-600 mt-2"> <strong>Available Quantity :</strong> {book.quantity}</p>
-                <div className="flex items-center gap-4">
-                    <strong className="text-gray-600">Rating :</strong>
-                    <Rating value={book.rating} size={20} />
-                </div>
-                <p className="text-gray-600 mt-4"><strong> Description :</strong> {book.description}</p>
+                <div>
+                    <h2 className="text-3xl font-semibold text-gray-800 mt-6">{book.name}</h2>
+                    <p className="text-gray-600 mt-2"><strong>Author :</strong> {book.author}</p>
+                    <p className="text-gray-600 mt-2"><strong> Category :</strong> {book.category}</p>
+                    <p className="text-gray-600 mt-2"> <strong>Available Quantity :</strong> {book.quantity}</p>
+                    <div className="flex items-center gap-4">
+                        <strong className="text-gray-600">Rating :</strong>
+                        <Rating value={book.rating} size={20} />
+                    </div>
+                    <p className="text-gray-600 mt-4"><strong> Description :</strong> <small>{book.description}</small></p>
 
-                <button
-                    onClick={ handleModal }
-                    className="btn btn-primary mt-6 font-bold text-2xl"
-                    disabled={book.quantity <= 0}
-                >
-                    {book.quantity > 0 ? "Borrow" : "Out of Stock"}
-                </button>
+                    <button
+                        onClick={handleModal}
+                        className="btn btn-primary mt-6 font-bold text-2xl"
+                        disabled={book.quantity <= 0}
+                    >
+                        {book.quantity > 0 ? "Borrow" : "Out of Stock"}
+                    </button>
+                </div>
             </div>
 
             {/* Borrow Modal */}

@@ -11,6 +11,8 @@ import {
 import { createContext, useEffect, useState } from "react";
 import { app } from "../Firebase/firebase.config";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
+import PropTypes from "prop-types";
+
 
 export const AuthContext = createContext();
 const auth = getAuth(app)
@@ -23,6 +25,7 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [name, setName] = useState(null)
     const [photoURL, setPhotoURL] = useState(null)
+    const [ error, setError ] = useState(null)
 
     console.log(user, name, photoURL)
 
@@ -52,8 +55,9 @@ const AuthProvider = ({ children }) => {
             setUser({ ...user, displayName, photoURL });
             return user;
         } catch (error) {
-            console.error("Error registering user:", error);
-            throw error;
+            setError(error)
+            // console.error("Error registering user:", error);
+            // throw error;
         }
     };
 
@@ -86,6 +90,8 @@ const AuthProvider = ({ children }) => {
         logout,
         setName,
         setPhotoURL,
+        error, 
+        setError,
     }
 
     useEffect(() => {
@@ -106,3 +112,7 @@ const AuthProvider = ({ children }) => {
 };
 
 export default AuthProvider;
+
+AuthProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+};

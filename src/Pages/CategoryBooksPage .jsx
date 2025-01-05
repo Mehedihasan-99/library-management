@@ -17,7 +17,7 @@ const CategoryBooksPage = () => {
               <img
                 src={book.image}
                 alt={book.name}
-                className="w-full h-48 object-cover rounded-lg"
+                className="h-48 mx-auto rounded-lg"
               />
               <h3 className="text-xl font-semibold text-gray-800 mt-3">{book.name}</h3>
               <p className="text-gray-600">By: {book.author}</p>

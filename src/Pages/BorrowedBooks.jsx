@@ -2,12 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import axios from "axios";
 import Loading from "../Components/Loading";
+import Swal from "sweetalert2";
 
 const BorrowedBooks = () => {
-    const { user } = useContext(AuthContext);
+    const { user, error, setError } = useContext(AuthContext);
     const [borrowedBooks, setBorrowedBooks] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [ error , setError ] = useState(null)
     const email = user?.email;
     useEffect(() => {
         const fetchBooks = async () => {
@@ -41,6 +41,14 @@ const BorrowedBooks = () => {
 
     if ( loading ) {
         return <Loading />
+    }
+    
+    if ( error ) {
+         Swal.fire({
+                        title: { error},
+                        text: "Your Book borrowed successfully!",
+                        icon: "success"
+                    });
     }
 
     return (
