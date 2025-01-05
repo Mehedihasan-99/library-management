@@ -2,6 +2,7 @@ import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { Link, useLoaderData } from 'react-router-dom';
 import Rating from "react-rating-stars-component";
+import { Helmet } from 'react-helmet';
 
 const AllBooks = () => {
     const books = useLoaderData();
@@ -18,6 +19,9 @@ const AllBooks = () => {
 
     return (
         <div className="md:p-6">
+            <Helmet>
+                <title>Library Management | All Books </title>
+            </Helmet>
             <h1 className="text-3xl font-bold text-center mb-8">All Books</h1>
             <Tabs>
                 <TabList className="flex flex-col md:flex-row justify-center gap-4 mb-6">
@@ -40,14 +44,15 @@ const AllBooks = () => {
                             ) : (
                                 filterBooks(category).map((book) => (
 
-                                    <div key={book._id} className="card gap-5 bg-white shadow-md p-4 rounded-lg">
+                                    <div key={book._id} className="card gap-3 bg-white shadow-md p-4 rounded-lg">
                                         <img
                                             src={book.image}
                                             alt={book.name}
-                                            className="w-full h-48 object-cover rounded-lg"
+                                            className="h-48 mx-auto rounded-lg"
                                         />
+                                        <h3 className="text-2xl flex-1 font-bold text-gray-800">{book.name}</h3>
                                         <div className='text-xl flex-1 space-y-2'>
-                                            <h3 className="text-2xl font-bold text-gray-800 mt-3">{book.name}</h3>
+
                                             <p><strong>By : </strong>{book.author}</p>
                                             <p><strong>Category :</strong> {book.category}</p>
                                             <p><strong>Quantity :</strong> {book.quantity}</p>

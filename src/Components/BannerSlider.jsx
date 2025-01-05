@@ -49,7 +49,9 @@ const BannerSlider = () => {
                 <SwiperSlide
                     className="relative text-white text-center"
                 >
-                    <img src={'https://i.ibb.co.com/34PxTbV/Screenshot-2024-12-28-070937.jpg'} alt="" />
+                    <img src={'https://i.ibb.co.com/34PxTbV/Screenshot-2024-12-28-070937.jpg'} 
+                    alt=""
+                    className="w-full" />
                     <div className="absolute top-0 flex flex-col items-center justify-center w-full bg-black bg-opacity-50 h-full ">
                         <h2 className="text-2xl md:text-4xl font-bold text-center px-4  rounded-lg">
                             Borrow Books With Ease

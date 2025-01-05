@@ -3,11 +3,12 @@ import { AuthContext } from "../Providers/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const AddBook = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate()
-    
+
     const newBook = {
         image: "",
         name: "",
@@ -43,6 +44,9 @@ const AddBook = () => {
 
     return (
         <div className="container mx-auto">
+            <Helmet>
+                <title>Library Management | Add Book</title>
+            </Helmet>
             <h1 className="text-2xl font-bold text-center bg-base-200 mb-4">Add a Book</h1>
             <form
                 onSubmit={handleSubmit}

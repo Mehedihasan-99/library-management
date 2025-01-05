@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Providers/AuthProvider";
+import { Helmet } from "react-helmet";
 
 
 const Login = () => {
@@ -60,6 +61,9 @@ const Login = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Library Management | Login</title>
+            </Helmet>
             <div className="bg-base-300 rounded-2xl w-11/12 md:max-w-[750px] mx-auto my-10">
                 <div className="flex flex-col justify-center md:gap-2 p-2 md:px-20 py-12">
                     <div>

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -36,7 +37,7 @@ const UpdateBookComponent = () => {
             } else {
                 Swal.fire({
                     title: "Error !!",
-                    text:'Failed to update book',
+                    text: 'Failed to update book',
                     icon: "Error"
                 });
             }
@@ -48,6 +49,9 @@ const UpdateBookComponent = () => {
 
     return (
         <div className="p-4 max-w-md mx-auto bg-white rounded shadow-md">
+            <Helmet>
+                <title>Library Management | Update Book</title>
+            </Helmet>
             <h2 className="text-xl font-bold mb-4">Update Book</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">

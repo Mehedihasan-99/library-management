@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import BannerSlider from "../Components/BannerSlider";
 import BookCategories from "../Components/BookCategories";
 import EventsAndWorkshops from "../Components/Event";
@@ -7,6 +8,9 @@ const HomePage = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Library Management | Home</title>
+            </Helmet>
             <BannerSlider />
             <BookCategories />
             <Testimonials />

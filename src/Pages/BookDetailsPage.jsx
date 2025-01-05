@@ -4,6 +4,7 @@ import axios from "axios";
 import { AuthContext } from "../Providers/AuthProvider";
 import Rating from "react-rating-stars-component";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const BookDetailsPage = () => {
     const loadBook = useLoaderData()
@@ -69,9 +70,11 @@ const BookDetailsPage = () => {
         }
     };
 
-
     return (
         <div className="p-8 bg-gray-50">
+            <Helmet>
+                <title>Library Management | Book Details</title>
+            </Helmet>
             <div className="flex flex-col md:flex-row justify-center items-center md:gap-5  bg-white shadow-md p-2 md:p-6 rounded-lg max-w-3xl mx-auto">
                 <img
                     src={book.image}

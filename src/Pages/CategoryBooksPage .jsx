@@ -1,5 +1,6 @@
 import { useParams, Link, useLoaderData } from "react-router-dom";
 import Rating from "react-rating-stars-component";
+import { Helmet } from "react-helmet";
 
 const CategoryBooksPage = () => {
   const { category } = useParams();
@@ -7,6 +8,9 @@ const CategoryBooksPage = () => {
 
   return (
     <div className="p-4 md:p-8 bg-gray-50">
+      <Helmet>
+        <title>Library Management | {category}</title>
+      </Helmet>
       <h2 className="text-xl md:text-4xl font-semibold text-gray-800 mb-8">
         Books in <span className="text-purple-500 font-bold"> {category} </span> Category :
       </h2>

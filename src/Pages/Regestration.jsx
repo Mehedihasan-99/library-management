@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Providers/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
 
@@ -29,7 +30,7 @@ const Register = () => {
             setError({ ...error, password: "password must be minimum 1 Small letter" });
             return;
         };
-        createNewUser( email, password )
+        createNewUser(email, password)
             .then((result) => {
                 console.log(result.user)
                 Swal.fire({
@@ -53,6 +54,9 @@ const Register = () => {
 
     return (
         <div className=" bg-base-300 rounded-2xl w-11/12 md:w-3/4 mx-auto my-10">
+            <Helmet>
+                <title>Library Management | Regestration</title>
+            </Helmet>
             <div className="flex flex-col justify-center md:gap-2 p-2 md:px-20 py-12">
                 <h2 className="text-center font-semibold text-2xl md:text-4xl">Register your account</h2>
                 <div className="divider mb-0"></div>
