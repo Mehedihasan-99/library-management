@@ -7,12 +7,14 @@ const BorrowedBooks = () => {
     const { user } = useContext(AuthContext);
     const [borrowedBooks, setBorrowedBooks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [ error , setError ] = useState(null)
     const email = user?.email;
     useEffect(() => {
         const fetchBooks = async () => {
             try {
                 const response = await axios(`${import.meta.env.VITE_API_URL}/borrowed-books?email=${email}`);
                 const borrowedBooksData = response.data;
+                // console.log(borrowedBooksData.length)
 
                 const bookWithDetails = await Promise.all(
                     borrowedBooksData.map(async (borrowedBook) => {
@@ -21,8 +23,9 @@ const BorrowedBooks = () => {
                     })
                 );
                 setBorrowedBooks(bookWithDetails);
-            } catch {
-                console.log("Failed to fetch borrowed books.")
+            } catch ( error ) {
+                setError(error)
+                // console.log("Failed to fetch borrowed books.")
             }
             finally {
                 setLoading(false)

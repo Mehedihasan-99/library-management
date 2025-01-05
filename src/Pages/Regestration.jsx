@@ -5,7 +5,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 
 const Register = () => {
 
-    const { createNewUser } = useContext(AuthContext)
+    const { createNewUser, setName, setPhotoURL } = useContext(AuthContext)
     const [error, setError] = useState({})
     const navigate = useNavigate();
 
@@ -13,8 +13,8 @@ const Register = () => {
         e.preventDefault()
         setError({})
         const form = e.target;
-        // const name = form.name.value;
-        // const photo = form.photo.value;
+        const name = form.name.value;
+        const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
         if (password.length < 6) {
@@ -29,7 +29,7 @@ const Register = () => {
             setError({ ...error, password: "password must be minimum 1 Small letter" });
             return;
         };
-        createNewUser(email, password)
+        createNewUser( email, password )
             .then((result) => {
                 console.log(result.user)
                 Swal.fire({
@@ -38,6 +38,8 @@ const Register = () => {
                     icon: 'success',
                     confirmButtonText: 'Close'
                 })
+                setName(name);
+                setPhotoURL(photo)
                 form.reset();
                 navigate("/")
             })

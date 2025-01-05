@@ -23,7 +23,7 @@ const CategoryBooksPage = () => {
               <p className="text-gray-600">By: {book.author}</p>
               <p className="text-gray-500">Quantity: {book.quantity}</p>
               <div className="flex items-center mt-2">
-                <Rating value={book.rating} size={20} />
+                <Rating key={book._id} value={book.rating} size={20} />
                 <span className="ml-2 text-sm text-gray-500">{book.rating}</span>
               </div>
               <Link
