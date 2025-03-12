@@ -10,7 +10,7 @@ The **Library Management System** is a full-stack web application designed to ma
 
 ## **Live Site**
 - Visit Live Site: [ Library Management System ](https://library-management-e1c29.web.app/)
-- Visit github Repo Link Client Site:[ Client Site Github repo.](https://github.com/programming-hero-web-course2/b10a11-client-side-Mehedihasan-99)
+- Visit github Repo Link Client Site:[ Client Site Github repo.](https://github.com/Mehedihasan-99/library-management)
 - Visit github Repo Link Server Site:[ Server Site Github repo.](https://github.com/Mehedihasan-99/library-management-server )
 
 ---
